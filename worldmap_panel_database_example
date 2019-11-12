@@ -1,0 +1,55 @@
+WORLD MAP MYSQL AND POSTGRESQL EXAMPLE 
+=======================================
+
+
+----------------------------------------------------------------------------------------
+                                    POSTGRESQL
+----------------------------------------------------------------------------------------
+
+
+ [1] Table "public.worldmap_latlng"
+ Column  |           Type           | Collation | Nullable | Default
+---------+--------------------------+-----------+----------+---------
+ id      | integer                  |           | not null |
+ lat     | double precision         |           |          |
+ lng     | double precision         |           |          |
+ name    | character(10)            |           |          |
+ value   | double precision         |           |          |
+ dateadd | timestamp with time zone |           |          |
+ 
+[2] INSERT INTO worldmap_latlng values(1,16.282820,99.942230,'station1',51,'2019-11-12 14:23:28+07');
+
+
+[3] SELECT
+    dateadd AS "time",
+    name as name,
+    value as value,
+    lat as latitude,
+    lng as longitude
+    FROM worldmap_latlng
+   WHERE $__timeFilter(dateadd) ORDER BY 1
+
+
+
+------------------------------------------------------------------------------------
+                                  MYSQL
+------------------------------------------------------------------------------------
+[1] CREATE TABLE `worldmap_latlng` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lat` FLOAT NOT NULL,
+  `lng` FLOAT NOT NULL,
+  `name` VARCHAR(20) NOT NULL,
+  `value` FLOAT NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+ 
+ 
+[2] INSERT INTO `testdb`.`worldmap_latlng`(`lat`,`lng`,`name`,`value`,`timestamp`)
+  VALUES (50.72213159,12.45680043,'RZ5',1.0,now());
+
+[3] SELECT UNIX_TIMESTAMP(`timestamp`) as time_sec,
+  `value` as value,
+  `lat` as latitude,
+  `lng` as longitude,
+  `name` as name FROM worldmap_latlng WHERE $__timeFilter(`timestamp`) ORDER BY `timestamp` ASC
