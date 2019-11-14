@@ -1,0 +1,21 @@
+[1] -------------------------------------------------------------------------------------------------------
+CREATE SEQUENCE table_name_id_seq;
+ 
+CREATE TABLE table_name (
+    id integer NOT NULL DEFAULT nextval('table_name_id_seq')
+);
+ 
+ALTER SEQUENCE table_name_id_seq
+OWNED BY table_name.id;
+
+
+INSERT INTO fruits(id,name) 
+VALUES(DEFAULT,'Apple');
+
+[2] -------------------------------------------------------------------------------------------------------
+To get the sequence name of a SERIAL column in a table, you use the pg_get_serial_sequence() function as follows:
+        databasename=# pg_get_serial_sequence('table_name','column_name')
+        databasename=# SELECT currval(pg_get_serial_sequence('fruits', 'id'));
+
+[3] -------------------------------------------------------------------------------------------------------
+INSERT INTO fruits(name) VALUES('Banana')RETURNING id;
