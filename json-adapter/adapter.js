@@ -40,12 +40,12 @@ app.all('/query', function(req, res){
   let Data = timeserie;
 
   _.each(req.body.targets, function(target) {
-      var k = _.filter(Data, function(t) {
+      var out = _.filter(Data, function(t) {
         return t.target === target.target;
       });
 
-      _.each(k, function(kk) {
-        tsResult.push(kk)
+      _.each(out, function(resout) {
+        tsResult.push(resout)
       });
   });
 
