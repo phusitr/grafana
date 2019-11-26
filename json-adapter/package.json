@@ -1,0 +1,16 @@
+{
+  "name": "json-adapter",
+  "version": "1.0.0",
+  "description": "Modified from fake-simple-json-datasource",
+  "main": "adapter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Phusit Roongroj <phusit@nectec.or.th>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "lodash": "^4.13.1"
+  }
+}
