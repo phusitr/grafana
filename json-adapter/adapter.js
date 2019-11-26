@@ -16,7 +16,7 @@ function setCORSHeaders(res) {
 
 app.all('/', function(req, res) {
   setCORSHeaders(res);
-  res.send('I have a quest for you!');
+  res.send('JSON plugin adapter for grafana');
   res.end();
 });
 
